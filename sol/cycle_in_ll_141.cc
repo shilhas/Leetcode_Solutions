@@ -26,54 +26,7 @@ struct ListNode {
             }
             if (fast_p == slow_p) break;
         }
-        if ((fast_p != nullptr) && (fast_p->next != nullptr) && (slow_p != nullptr)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        if ((fast_p != nullptr) && (fast_p->next != nullptr) && (slow_p != nullptr)) return true;
+        else false;
     }
 
-typedef struct{
-    vector<int> val;
-    vector<int> indx;
-    bool hascycle;
-}TestVal_typ;
-
-TestVal_typ tests[] = {
-    {
-        .val = vector<int>{3, 2, 0, -4},
-        .indx = vector<int>{1, 2, 3, 1},
-        .hascycle = true
-    },
-    {
-        .val = vector<int>{1, 2},
-        .indx = vector<int>{1, 0},
-        .hascycle = true
-    },
-    {
-        .val = vector<int>{1},
-        .indx = vector<int>{INT_MAX},
-        .hascycle = true
-    }
-};
-
-ListNode * create_test_ll(TestVal_typ test) {
-    unordered_map<int, ListNode*> ll_map;
-    ListNode *ret = new ListNode(test.val[0]);
-    ll_map[0] = ret;
-    for (auto i = 0; i < test.indx.size(); i++) {
-
-    }
-}
-
-int main (void) {
-    for(auto test: tests) {
-        ListNode *TestNode = create_test_ll(test);
-        if(t.second == tmp) {
-            cout << "Test Passed, input " << t.first << " Output " << t.second << endl;
-        } else {
-            cout << "Test Failed for input " << t.first << endl;
-        }
-    }
-}
