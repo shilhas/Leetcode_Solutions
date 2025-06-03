@@ -32,12 +32,12 @@ public:
         set_influence_d(s_indx-1,c_indx+1,influence,-1);
     }
 
-    bool solve(int s_indx, int c_indx, vector<string>&res, vector<string>& influence) {
+    void solve(int s_indx, int c_indx, vector<string>res, vector<string> influence) {
         // check each next column if there is a free slot to place the queen
         res[s_indx][c_indx] = 'Q';
         if (c_indx + 1 == this->n_val) {
             results.push_back(res);
-            return true;
+            return;
         }
         set_influence(s_indx,c_indx,influence);
         for (int i = 0; i < this->n_val; i++) {
@@ -45,7 +45,6 @@ public:
                 solve(i, c_indx+1, res, influence);
             }
         }
-        return false;
     }
 
     vector<vector<string>> solveNQueens(int n) {
@@ -54,16 +53,14 @@ public:
         for (int i = 0; i < n; i++) {
             vector<string>res(n, string(n,'.'));
             vector<string>influence(n, string(n,'.'));
-            if (solve(i, 0, res, influence)) {
-                
-            }
+            solve(i, 0, res, influence);
         }
         return results;
     }
 };
 
 int main() {
-    vector<int>tests {4, 6};
+    vector<int>tests {4, 5};
     for(auto test: tests) {
         Solution sol;
         auto res = sol.solveNQueens(test);
