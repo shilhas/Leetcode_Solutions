@@ -6,16 +6,6 @@
 using namespace std;
 
 class Solution {
-    bool if_any_ripe(vector<vector<int>>& grid) {
-        for (int row = 0; row < grid.size(); ++row) {
-            for (int col = 0; col < grid[0].size(); ++col) {
-                if (grid[row][col] == 1) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 public:
     int orangesRotting(vector<vector<int>>& grid) {
         if (grid.size() == 1 and grid[0].size() == 1) {
@@ -23,16 +13,20 @@ public:
         }
 
         int mins = -1;
+        int total = 0; 
+        int rot_count = 0;
         queue<pair<int,int>>q;
         for (int row = 0; row < grid.size(); row++) {
             for (int col = 0; col < grid[0].size(); col++) {
+                if (grid[row][col] != 0) total++;
                 if (grid[row][col] == 2) {
                     q.push(make_pair(row, col));
                 }
             }
         }
-        if (q.empty()) return if_any_ripe(grid)? -1:0;
+        if (q.empty()) return total? -1:0;
         while(!q.empty()) {
+            rot_count += q.size();
             queue<pair<int,int>> nq;
             auto push_2_q = [](int row, int col, queue<pair<int,int>>&q, vector<vector<int>>& grid) {
                 if (grid[row][col] == 1) {
@@ -63,7 +57,7 @@ public:
         }
         
         
-        return  if_any_ripe(grid)? -1:mins;
+        return  rot_count!=total? -1:mins;
     }
 };
 
